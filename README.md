@@ -5,6 +5,7 @@
 - Install requirements (requirements.txt)
 - Install linters (pylint, mypy, flake8, black, nb-black)
 - Install jupyter-lab
+- Install windrose
 - Create a jupyter kernel for the venv : 
 ```python
 pip install ipykernel
