@@ -52,3 +52,7 @@ ipython kernel install --user --name=wind_power
 - `python data_processing.py` - (this may take a few minutes !)
 - `python main.py`
 - Enjoy
+
+</br>
+
+# [Results Presentation](results_presentation.md) 
