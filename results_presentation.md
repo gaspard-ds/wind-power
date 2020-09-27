@@ -213,20 +213,15 @@ Selected Data :
 ## 6. Model Benchmark
 
 - Models tested :
-
-    $LinearRegression(normalize=True),
-
+    ```
+    LinearRegression(normalize=True),
     LassoCV(normalize=True),
-
     RandomForestRegressor(),
-
     AdaBoostRegressor(),
-
     LarsCV(normalize=True),
-
     ExtraTreesRegressor(),
-
-    GradientBoostingRegressor()$
+    GradientBoostingRegressor()
+    ```
 
 - Scenarii :
     1. Relative production as target → production and capacity excluded from features
@@ -255,11 +250,13 @@ Selected Data :
 - Model selected `n° 15`:
     - Shortlist of features, only the most important
     - As much data as seemed necessary for good results : 50% train
-    - Equation : (terms equal to zero are non null but smaller than the display limit)
-    `+0.025*speed_44 +0.023*speed_28 +0.017*speed_24 
+    - Equation : (terms equal to zero are non null but smaller than the display limit)</br>
+    ```
+    +0.025*speed_44 +0.023*speed_28 +0.017*speed_24 
     +0.012*speed_32 +0.012*speed_53 +0.011*speed_76 +0.008*speed_75 
     +0.001*speed_11 +0.0*gust +0.0*pressure -0.0*direction_94 
-    -0.008*temperature -0.009*speed_94 -0.017*speed +1.401`
+    -0.008*temperature -0.009*speed_94 -0.017*speed +1.401
+    ```
 
     ![results_presentation/Untitled%2026.png](results_presentation/Untitled%2026.png)
 
@@ -321,5 +318,7 @@ Permettrait d'utiliser les vitesse de vent par commune
 - If necessary, could be made into a library for wind power modeling and made available on `pypi`
 
 # That's all for now, Thanks for reading !
+
+</br>
 
 ![results_presentation/Untitled%2031.png](results_presentation/Untitled%2031.png)
