@@ -1,11 +1,13 @@
 """Main Module"""
-from typing import Any, List, Tuple, Dict, Optional
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
+
 import joblib
 import pandas as pd
 from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import cross_val_score, train_test_split
+
 import wind_constants as cst
-from pathlib import Path
 
 
 def train_one_model(
@@ -16,6 +18,21 @@ def train_one_model(
     split_quantile: float = 0.75,
     **kwargs: Any,
 ) -> Tuple[any, Dict[str, float]]:
+    """[summary]
+
+    :param data: Input data
+    :type data: pd.DataFrame
+    :param features: features for the model
+    :type features: List[str]
+    :param target: target of the model
+    :type target: str
+    :param estimator: sklearn estimator, defaults to None
+    :type estimator: Optional[Any], optional
+    :param split_quantile: ratio of the data used for training, defaults to 0.75
+    :type split_quantile: float, optional
+    :return: model and scores
+    :rtype: Tuple[any, Dict[str, float]]
+    """
     estimator = estimator if estimator is not None else LinearRegression
     data = data[features + [target]].dropna()
     X_train, X_test, y_train, y_test = train_test_split(
@@ -27,6 +44,11 @@ def train_one_model(
     scores = {
         "r2_train": round(model.score(X=X_train, y=y_train), 3),
         "r2_test": round(model.score(X=X_test, y=y_test), 3),
+        "r2_CV_test": list(
+            cross_val_score(
+                estimator=model, X=X_test, y=y_test, scoring="r2", cv=5, n_jobs=4
+            ).round(2)
+        ),
     }
     return model, scores
 
