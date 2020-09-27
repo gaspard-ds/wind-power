@@ -45,10 +45,7 @@ ipython kernel install --user --name=wind_power
 - Benchmarking model results using a private library
 - Displays detailed table with results and model parameters
 - Plots : results per model type, difference between train and test scores for all models
-
-#### `7.Model_Benchmark.ipynb` :
-- Twist on the first benchmark : the goal is to see if the production could be used directly as a target, having installed capacity as a feature. </br>
-- Same models as before, but interesting results, as they validate one hypothesis.
+- Also included : a twist on the Linear Regression model,to see if the production could be used directly as a target, having installed capacity as a feature. </br>
 
 ## Speedrun :
 #### If you wish to quickly reproduce the results shown here, using your favorite console : 
