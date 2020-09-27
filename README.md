@@ -49,3 +49,9 @@ ipython kernel install --user --name=wind_power
 #### `7.Model_Benchmark.ipynb` :
 - Twist on the first benchmark : the goal is to see if the production could be used directly as a target, having installed capacity as a feature. </br>
 - Same models as before, but interesting results, as they validate one hypothesis.
+
+## Speedrun :
+#### If you wish to quickly reproduce the results shown here, using your favorite console : 
+- `python data_processing.py` - (this may take a few minutes !)
+- `python main.py`
+- Enjoy
