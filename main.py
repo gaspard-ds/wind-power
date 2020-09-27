@@ -18,7 +18,8 @@ def train_one_model(
     split_quantile: float = 0.75,
     **kwargs: Any,
 ) -> Tuple[any, Dict[str, float]]:
-    """[summary]
+    """Generic function to train one model on the given data
+    and output the trained model and scores
 
     :param data: Input data
     :type data: pd.DataFrame
@@ -53,7 +54,14 @@ def train_one_model(
     return model, scores
 
 
-def get_absolute_predictions(data: pd.DataFrame, model: Any) -> pd.Series(dtype="float64"):
+def get_absolute_predictions(data: pd.DataFrame, model: Any) -> pd.Series:
+    """Function to turn the model predcition base on reltavie production back to production in MWH
+
+    :param data: Input dataframe
+    :type data: pd.DataFrame, model, optional
+    :return: Return Wind Power Production in MWH (if the data has been aggregated like in our case)
+    :rtype: pd.Series
+    """
     predictions = pd.Series(data=model.predict(X=data), index=data.index)
     absolute_prediction = predictions * data["capacity"]
     absolute_prediction.name = "absolute_predictions_MWh"
