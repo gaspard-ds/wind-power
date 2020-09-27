@@ -12,14 +12,14 @@ RAW_PRODUCTION = "data/raw/eco2mix-regional-cons-def.csv"
 RAW_WEATHER = "data/raw/donnees-synop-essentielles-omm.csv"
 
 SELECTION_CAPACITY = "data/selection/parc-eolien.joblib"
-SELECTION_PRODUCTION = "data/seelction/production.joblib"
+SELECTION_PRODUCTION = "data/selection/production.joblib"
 SELECTION_WEATHER = "data/selection/weather.joblib"
 
 PROCESSED_DATA = "data/processed/processed_uncleaned.joblib"
 
 
 def data_selection_capacity() -> None:
-    data_path = Path(__file__).resolve() / RAW_CAPACITY
+    data_path = Path(__file__).parent.resolve() / RAW_CAPACITY
     data = pd.read_csv(data_path, sep=";")
     data = data.drop(
         columns=["Parc installé solaire (MW)", "Géo-shape région", "Géo-point région"]
@@ -28,23 +28,23 @@ def data_selection_capacity() -> None:
 
 
 def data_selection_production() -> None:
-    data_path = Path(__file__).resolve() / RAW_PRODUCTION
+    data_path = Path(__file__).parent.resolve() / RAW_PRODUCTION
     data = pd.read_csv(data_path, sep=";")
     data = data[cst.TO_KEEP_PRODUCTION]
     joblib.dump(value=data, filename=SELECTION_PRODUCTION)
 
 
 def data_selection_weather() -> None:
-    data_path = Path(__file__).resolve() / RAW_WEATHER
+    data_path = Path(__file__).parent.resolve() / RAW_WEATHER
     data = pd.read_csv(data_path, sep=";")
     data = data[cst.TO_KEEP_WEATHER]
     joblib.dump(value=data, filename=SELECTION_WEATHER)
 
 
 def data_merge() -> None:
-    capacity = joblib.load(Path(__file__).resolve() / SELECTION_CAPACITY)
-    weather = joblib.load(Path(__file__).resolve() / SELECTION_WEATHER)
-    production = joblib.load(Path(__file__).resolve() / SELECTION_PRODUCTION)
+    capacity = joblib.load(Path(__file__).parent.resolve() / SELECTION_CAPACITY)
+    weather = joblib.load(Path(__file__).parent.resolve() / SELECTION_WEATHER)
+    production = joblib.load(Path(__file__).parent.resolve() / SELECTION_PRODUCTION)
 
     # Linear Interpolation for capacity
     # Index for the data is set at 3H to match weather granularity
@@ -91,6 +91,7 @@ def data_merge() -> None:
     data["temperature"] = data_weather["Température"]
     data["pressure"] = data_weather["Pression station"]
     data["gust"] = data_weather["Rafales sur une période"]
+    data = data.assign(month=lambda x: x.index.month)
 
     # Wind speed and direction for each region
     for code, _ in cst.CODE_REGIONS.items():
@@ -99,7 +100,7 @@ def data_merge() -> None:
         data[f"speed_{code}"] = weather_region["Vitesse du vent moyen 10 mn"]
         data[f"direction_{code}"] = weather_region["Direction du vent moyen 10 mn"]
 
-    joblib.dump(data, Path(__file__).resolve() / PROCESSED_DATA)
+    joblib.dump(data, Path(__file__).parent.resolve() / PROCESSED_DATA)
 
 
 if __name__ == "__main__":
