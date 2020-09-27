@@ -132,4 +132,15 @@ FEATURES_REDUCED = [
     "direction_94",
 ]
 
+FEATURES_GLOBAL = [
+    "speed",
+    "direction",
+    "pressure",
+    "temperature",
+    "gust",
+]
+
 TARGET = "relative_production"
+
+ALT_TARGET = "production"
+ALT_FEATURES = FEATURES + ["capacity"]
