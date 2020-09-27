@@ -233,7 +233,7 @@ Selected Data :
     2. Production as target → capacity kept in features
 - Features used :
     - all present after pre-processing except detailed above
-    - also tested reducing wiht RF feature importance
+    - also tested reducing with RF feature importance
     - also tried keeping only national averages (poor results)
 - Train/Test splits used :
     - 75% / 25% → `Train before 2018-09-11 08:00:00+02:00 and test after.`→ gives best result and doesn't seem to result in more over fitting (see below)
@@ -244,24 +244,27 @@ Selected Data :
 
 ![results_presentation/Untitled%2023.png](results_presentation/Untitled%2023.png)
 
-- Model selected :
-    - As many features as permitted
-    - As much data as seemed reasonable (75% as train)
-    - Equation : 
+- Watching out for Over-fitting :
 
-    $+0.02*speed_44 +0.02*speed_28 +0.02*speed_24 +0.01*speed_32 
-    +0.01*speed_53 +0.01*speed_76 +0.01*speed_75 +0.0*speed_11 +0.0*month 
-    +0.0*gust +0.0*direction_84 +0.0*direction_27 +0.0*direction_53 
-    +0.0*direction +0.0*direction_28 +0.0*direction_52 +0.0*pressure 
-    -0.0*direction_93 -0.0*direction_11 -0.0*direction_75 -0.0*direction_24 
-    -0.0*direction_44 -0.0*direction_32 -0.0*direction_94 -0.0*speed_27 
-    -0.0*direction_76 -0.0*speed_93 -0.0*speed_84 -0.0*speed_52 
-    -0.01*temperature -0.01*speed_94 -0.01*speed +1.8$
+![results_presentation/Untitled%2024.png](results_presentation/Untitled%2024.png)
 
-        ![results_presentation/Untitled%2024.png](results_presentation/Untitled%2024.png)
+- Impact of estimator type :
 
-    - This model is the output (saved in models folder) of the `main.py` script
-    - The script uses a model training function that can be used with any `scikit-learn` estimators and `**kwargs`
+![results_presentation/Untitled%2025.png](results_presentation/Untitled%2025.png)
+
+- Model selected `n° 15`:
+    - Shortlist of features, only the most important
+    - As much data as seemed necessary for good results : 50% train
+    - Equation : (terms equal to zero are non null but smaller than the display limit)
+    `+0.025*speed_44 +0.023*speed_28 +0.017*speed_24 
+    +0.012*speed_32 +0.012*speed_53 +0.011*speed_76 +0.008*speed_75 
+    +0.001*speed_11 +0.0*gust +0.0*pressure -0.0*direction_94 
+    -0.008*temperature -0.009*speed_94 -0.017*speed +1.401`
+
+    ![results_presentation/Untitled%2026.png](results_presentation/Untitled%2026.png)
+
+    - This model is very similar to the output (saved in models folder) of the `main.py` script
+    - The script uses a model training function that can be used with any `scikit-learn` estimators, any train/test split and any `**kwargs`
 
 ## 7. Model insights :
 
@@ -270,18 +273,18 @@ Selected Data :
 Used for energy models measure and validation
 - *As per ASHRAE Guideline 14, a CV(RMSE) of and below 25% indicates a good model fit with acceptable predictive capabilities*
 
-![results_presentation/Untitled%2025.png](results_presentation/Untitled%2025.png)
+![results_presentation/Untitled%2027.png](results_presentation/Untitled%2027.png)
 
 - **speed_28** has a lot of predicting power, which is surprising considering the small capacity installed there (**Normandie**)
 
-    ![results_presentation/Untitled%2026.png](results_presentation/Untitled%2026.png)
+    ![results_presentation/Untitled%2028.png](results_presentation/Untitled%2028.png)
 
 - `direction_grouped` for each regions : dropped because useless
 - It was indeed better to use the relative power as target (it really shows in the test period ) :
 
-![results_presentation/Untitled%2027.png](results_presentation/Untitled%2027.png)
+![results_presentation/Untitled%2029.png](results_presentation/Untitled%2029.png)
 
-![results_presentation/Untitled%2028.png](results_presentation/Untitled%2028.png)
+![results_presentation/Untitled%2030.png](results_presentation/Untitled%2030.png)
 
 ## 8. Model selection : what/who for ?
 
@@ -319,4 +322,4 @@ Permettrait d'utiliser les vitesse de vent par commune
 
 # That's all for now, Thanks for reading !
 
-![results_presentation/Untitled%2029.png](results_presentation/Untitled%2029.png)
+![results_presentation/Untitled%2031.png](results_presentation/Untitled%2031.png)
