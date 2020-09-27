@@ -1,8 +1,10 @@
-from typing import Any, List, Tuple, Dict, Optional
-from numpy.core.fromnumeric import product
-import pandas as pd
-import joblib
 from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
+
+import joblib
+import pandas as pd
+from numpy.core.fromnumeric import product
+
 import wind_constants as cst
 
 RAW_CAPACITY = "data/raw/parc-regional-annuel-prod-eolien-solaire.csv"
