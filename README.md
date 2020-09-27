@@ -23,7 +23,8 @@ ipython kernel install --user --name=wind_power
 - `main.py` : contains functions to train one model and output predictions for production in MWH. Can be used as a script to train a linear regression, print the scores and save the model.
 
 ## Notebooks :
-`1.Capacity_Exploration.ipynb` & `2.Weather_Exploration.ipynb` & `3.Production_Exploration.ipynb` : 
+
+#### `1.Capacity_Exploration.ipynb` & `2.Weather_Exploration.ipynb` & `3.Production_Exploration.ipynb` : 
 - Data exploration and selection of useful columns for capacity, weather and production data. </br>
 - Functions were added later to `data_processing` to replicate the results and provide a executable script.</br>
 - Notebooks left here to show the steps taken and the interim results/plots.</br>
