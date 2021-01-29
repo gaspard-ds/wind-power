@@ -134,6 +134,8 @@ venv/
 venv_demo/
 venv*
 ENV/
+automl/
+.automl
 
 # Spyder project settings
 .spyderproject
